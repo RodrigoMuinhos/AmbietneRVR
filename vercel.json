@@ -1,0 +1,5 @@
+﻿{
+  "buildCommand": "npm -w @rvr/frontend run build",
+  "outputDirectory": "apps/frontend/dist",
+  "framework": "vite"
+}

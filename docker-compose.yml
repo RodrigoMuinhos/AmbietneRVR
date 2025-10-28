@@ -1,0 +1,30 @@
+﻿services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.api
+    env_file: .env
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./apps/api:/app/apps/api
+      - ./packages/shared:/app/packages/shared
+      - /app/node_modules
+    command: sh -c "npm i && npm -w @rvr/api run build && npm -w @rvr/api run start"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.web
+    env_file: .env
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/frontend:/app/apps/frontend
+      - ./packages/shared:/app/packages/shared
+      - /app/node_modules
+    depends_on:
+      - api
+    environment:
+      - VITE_API_URL=http://localhost:3333
+    command: sh -c "npm i && npm -w @rvr/frontend run dev"

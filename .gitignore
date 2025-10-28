@@ -1,0 +1,14 @@
+﻿node_modules
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+.env
+.env.local
+.env.development
+.env.production
+.DS_Store
+*.log
+dist
+apps/frontend/dist
+apps/api/dist
+packages/*/dist

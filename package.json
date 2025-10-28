@@ -1,0 +1,20 @@
+{
+  "name": "ambientervrweb",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "npm run dev:local",
+    "dev:local": "concurrently -k -n API,WEB -c blue,magenta \"npm run dev -w @rvr/api\" \"npm run dev -w @rvr/frontend\"",
+    "dev:docker": "docker compose up --build",
+    "stop": "docker compose down",
+    "clean": "rimraf node_modules apps/*/node_modules packages/*/node_modules",
+    "build:web": "npm --workspace @rvr/frontend run build",
+    "build:api": "npm --workspace @rvr/api run build",
+    "build": "npm run build:web && npm run build:api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "rimraf": "^6.0.1"
+  }
+}
