@@ -1,0 +1,29 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { StepLayout } from "../../components/StepLayout";
+import { usePatients } from "../../context/PatientsContext";
+export function CheckinPhotoStep() {
+    const navigate = useNavigate();
+    const { selectedPatient, updatePatient } = usePatients();
+    const [countdown, setCountdown] = useState(4);
+    useEffect(() => {
+        if (!selectedPatient) {
+            navigate("/totem/checkin/letra", { replace: true });
+            return;
+        }
+        if (countdown === 0 && selectedPatient) {
+            updatePatient(selectedPatient.id, { fotoTirada: true });
+            navigate("/totem/checkin/sucesso");
+            return;
+        }
+        const timer = setTimeout(() => {
+            setCountdown((prev) => Math.max(prev - 1, 0));
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [countdown, selectedPatient, updatePatient, navigate]);
+    if (!selectedPatient) {
+        return null;
+    }
+    return (_jsx(StepLayout, { title: "Sorria! \uD83D\uDE00", subtitle: "Hora de registrar sua presen\u00E7a.", children: _jsxs("div", { className: "flex flex-col items-center gap-8", children: [_jsx("div", { className: "flex h-72 w-72 items-center justify-center rounded-3xl border-4 border-dashed border-slate-300 bg-white shadow-inner", children: _jsx("span", { className: "text-6xl font-black text-slate-400", children: countdown || "✔" }) }), _jsx("p", { className: "text-center text-xl text-slate-600", children: "Ajuste-se na frente do totem e mantenha o sorriso at\u00E9 o clique." })] }) }));
+}
