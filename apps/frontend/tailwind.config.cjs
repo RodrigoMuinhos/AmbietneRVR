@@ -7,12 +7,15 @@
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#111827",
-          fg: "#ffffff",
-          accent: "#F6C600"
-        }
-      }
-    }
+          marine: "#16697A",
+          sky: "#489FB5",
+          mist: "#82C0CC",
+          sand: "#EDE7E3",
+          sun: "#FFA62B",
+          dark: "#0F172A",
+        },
+      },
+    },
   },
   plugins: []
 }
