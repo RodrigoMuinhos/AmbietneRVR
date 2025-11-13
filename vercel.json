@@ -1,5 +1,6 @@
 ﻿{
-  "buildCommand": "npm -w @rvr/frontend run build",
-  "outputDirectory": "apps/frontend/dist",
-  "framework": "vite"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm --workspace=@rvr/frontend run build",
+  "outputDirectory": "apps/frontend/dist"
 }
